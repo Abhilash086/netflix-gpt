@@ -1,6 +1,12 @@
 # Netflix-GPT
 - npm create vite@latest .
 - configured TailwindCSS
+- Header
+- Routing of App
+- Login Form
+- Sign Up Form
+- Form Validation
+- useRef() hook
 
 # Features
 - Login/Signup

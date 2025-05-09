@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
 
 const Login = () => {
 
-    const [isSignInForm, setIsSignInForm] = useState(true)
+    const [isSignInForm, setIsSignInForm] = useState(true);
+
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const email = useRef(null);
+    const password = useRef(null);
+
+    const handleButtonClick = ()=>{
+        // Validate the Form Data
+        const message = checkValidData(email.current.value, password.current.value)
+        setErrorMessage(message)
+    }
 
     const toggleSignInForm = ()=>{
         setIsSignInForm(!isSignInForm);
@@ -19,7 +31,7 @@ const Login = () => {
           alt=""
         />
 
-        <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 py-12 px-10 bg-black/65 rounded-md shadow-lg max-w-md w-full">
+        <form onSubmit={(e)=> e.preventDefault()} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 py-12 px-10 bg-black/65 rounded-md shadow-lg max-w-md w-full">
           <h1 className="font-bold text-4xl mb-10 text-white text-center">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>
@@ -29,16 +41,20 @@ const Login = () => {
             className="block w-full p-3 my-4 border border-gray-500 text-white rounded max-w-[300px] mx-auto"
           />}
           <input
+            ref={email}
             type="text"
             placeholder="Email"
             className="block w-full p-3 my-4 border border-gray-500 text-white rounded max-w-[300px] mx-auto"
           />
           <input
+            ref={password}
             type="password"
             placeholder="Password"
             className="block w-full p-3 my-4 border border-gray-500 text-white rounded max-w-[300px] mx-auto"
           />
+          <p className="text-red-600 ml-9">{errorMessage}</p>
           <button
+            onClick={handleButtonClick}
             type="submit"
             className="block w-full p-3 my-4 bg-red-600 text-white font-semibold rounded hover:bg-red-700 max-w-[300px] mx-auto cursor-pointer"
           >
