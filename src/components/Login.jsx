@@ -1,25 +1,84 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const [isSignInForm, setIsSignInForm] = useState(true);
+  const email = useRef(null);
+  const password = useRef(null);
+  const name = useRef(null);
 
-    const [errorMessage, setErrorMessage] = useState(null);
+  const handleButtonClick = () => {
+    // Validate the Form Data
+    const message = checkValidData(email.current.value, password.current.value);
+    setErrorMessage(message);
 
-    const email = useRef(null);
-    const password = useRef(null);
+    if (message) return;
 
-    const handleButtonClick = ()=>{
-        // Validate the Form Data
-        const message = checkValidData(email.current.value, password.current.value)
-        setErrorMessage(message)
+    // Sign In/Sign Up
+    if (!isSignInForm) {
+      // Sign Up Logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              const { uid, email, displayName } = auth;
+              dispatch(addUser({ uid, email, displayName }));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " : " + errorMessage);
+        });
+    } else {
+      // Sign In Logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " : " + errorMessage);
+        });
     }
+  };
 
-    const toggleSignInForm = ()=>{
-        setIsSignInForm(!isSignInForm);
-    }
+  const toggleSignInForm = () => {
+    setIsSignInForm(!isSignInForm);
+  };
 
   return (
     <div>
@@ -31,15 +90,22 @@ const Login = () => {
           alt=""
         />
 
-        <form onSubmit={(e)=> e.preventDefault()} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 py-12 px-10 bg-black/65 rounded-md shadow-lg max-w-md w-full">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 py-12 px-10 bg-black/65 rounded-md shadow-lg max-w-md w-full"
+        >
           <h1 className="font-bold text-4xl mb-10 text-white text-center">
             {isSignInForm ? "Sign In" : "Sign Up"}
           </h1>
-          {!isSignInForm && <input
-            type="text"
-            placeholder="Full Name"
-            className="block w-full p-3 my-4 border border-gray-500 text-white rounded max-w-[300px] mx-auto"
-          />}
+          {!isSignInForm && (
+            <input
+              required
+              ref={name}
+              type="text"
+              placeholder="Full Name"
+              className="block w-full p-3 my-4 border border-gray-500 text-white rounded max-w-[300px] mx-auto"
+            />
+          )}
           <input
             ref={email}
             type="text"
@@ -60,7 +126,14 @@ const Login = () => {
           >
             {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
-          <p className="text-white z-10 ml-9 mt-8 cursor-pointer" onClick={toggleSignInForm}>{isSignInForm ? "New to Netflix? Sign Up Now" : "Already a User? Sign In here"}</p>
+          <p
+            className="text-white z-10 ml-9 mt-8 cursor-pointer"
+            onClick={toggleSignInForm}
+          >
+            {isSignInForm
+              ? "New to Netflix? Sign Up Now"
+              : "Already a User? Sign In here"}
+          </p>
         </form>
       </div>
     </div>

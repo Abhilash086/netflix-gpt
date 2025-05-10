@@ -7,6 +7,12 @@
 - Sign Up Form
 - Form Validation
 - useRef() hook
+- Create Sign Up user Account
+- Implement Sign In user API
+- created our Redux store with userSlice
+- Implemented Sign out
+- Update Profile API
+- Fetch 
 
 # Features
 - Login/Signup
