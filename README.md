@@ -26,6 +26,8 @@
 - Updated store with trailerVideo Data
 - Embedded the youtube video and make it autoplay and mute.
 - Netflix background video implemented
+- Made Responsive
+- Build Secondary container
 
 # Features
 - Login/Signup

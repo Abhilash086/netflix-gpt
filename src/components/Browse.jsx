@@ -7,7 +7,7 @@ const Browse = () => {
   useNowPlayingMovies();
 
   return (
-    <div>
+    <div className='w-full h-screen overflow-x-hidden'>
       <Header />
       <MainContainer />
       <SecondaryContainer />

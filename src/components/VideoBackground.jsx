@@ -6,7 +6,7 @@ const VideoBackground = ({ movieId, volumeOn }) => {
     const trailerVideo = useSelector(store => store.movies?.trailerVideo)
     
     return (
-        <div className="h-full top-0 relative sm:aspect-video sm:absolute w-screen overflow-hidden">
+        <div className="h-full top-0 relative sm:aspect-video sm:absolute lg:scale-x-110 w-screen overflow-hidden">
             <div className={`${volumeOn ? "hidden" : "block"} w-screen sm:top-0 h-full absolute sm:aspect-video bg-black/50 z-10`}></div>
             <iframe
                 className="scale-110 scale-y-125 lg:top-0 h-full absolute w-screen"

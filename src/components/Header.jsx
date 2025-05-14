@@ -53,7 +53,7 @@ const Header = () => {
         />
         <button
           onClick={handleSignOut}
-          className="border border-black py-1 px-4 bg-red-500/75 text-[14px] sm:text-lg text-white cursor-pointer rounded-md"
+          className="border border-black py-1 px-4 bg-red-500/75 text-[14px] sm:text-lg text-white cursor-pointer"
         >
           {"Sign out"}
         </button>
