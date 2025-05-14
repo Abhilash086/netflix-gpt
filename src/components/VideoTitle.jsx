@@ -7,8 +7,8 @@ const VideoTitle = ({ title, overview, setVolumeOn, volumeOn }) => {
 
 
   return (
-    <div className="sm:flex absolute flex top-0 sm:aspect-video items-end lg:pb-[14vmax] h-full z-12">
-      <div className="pl-[6vw] w-screen sm:pl-[5vw] items-end pb-8 sm:pb-10 justify-between flex z-11">
+    <div className="sm:flex absolute flex top-0 items-end h-full z-12">
+      <div className="pl-[6vw] w-screen sm:pl-[5vw] items-end pb-8 sm:pb-16 justify-between flex z-11">
         <div className="flex flex-col gap-3 sm:gap-5">
           <h1 className={`opacity-85 sm:opacity-100 text-2xl ${volumeOn ? "hidden":"block"} sm:text-3xl lg:text-[6vmin] text-white/80 font-bold`}>
             {title}
