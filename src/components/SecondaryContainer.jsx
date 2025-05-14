@@ -2,7 +2,7 @@ import React from 'react'
 
 const SecondaryContainer = () => {
   return (
-    <div>SecondaryContainer</div>
+    <div className='mt-10'>SecondaryContainer</div>
   )
 }
 
