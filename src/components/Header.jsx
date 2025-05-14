@@ -36,24 +36,24 @@ const Header = () => {
     }, []);
 
   return (
-    <div className="px-8 py-6 absolute w-full z-15 bg-gradient-to-b flex items-center justify-between from-black">
-      <div className="flex items-center">
+    <div className="px-4 sm:px-8 py-6 fixed w-full z-15 bg-gradient-to-b flex items-center justify-between from-black">
+      <div className="flex items-center gap-2 justify-center">
         <img
-          className="w-[150px] mix-blend-normal contrast-200 opacity-[1]"
+          className="w-[100px] sm:w-[150px] mix-blend-normal contrast-200 opacity-[1]"
           src={LOGO}
           alt="Logo"
         />
-        <h1 className="font-bold text-4xl text-white -m-5 -mt-7">-GPT</h1>
+        <h1 className="font-bold text-xl sm:text-4xl text-white -ml-5 -mt-1 sm:-ml-6 sm:-mt-2">-GPT</h1>
       </div>
-      {user && <div className="flex gap-3">
+      {user && <div className="flex py-1 gap-3">
         <img
-          className="w-10"
+          className="w-8 sm:w-10"
           src={PROFILE_PIC}
           alt=""
         />
         <button
           onClick={handleSignOut}
-          className="border border-black px-4 bg-red-500/75  text-white cursor-pointer rounded-md"
+          className="border border-black py-1 px-4 bg-red-500/75 text-[14px] sm:text-lg text-white cursor-pointer rounded-md"
         >
           {"Sign out"}
         </button>
