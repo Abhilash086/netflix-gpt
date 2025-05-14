@@ -14,7 +14,7 @@ const MainContainer = () => {
   const {original_title, overview} = mainMovie;
 
   return (
-    <div className='bg-black relative h-[45vh] w-screen pt-2 sm:pt-12 sm:h-[60%] md:h-full overflow-hidden'>
+    <div className='bg-black relative h-[45vh] w-screen pt-2 sm:pt-12 sm:h-[60%] lg:h-full overflow-hidden'>
       <VideoTitle title={original_title} overview={overview} volumeOn={volumeOn} setVolumeOn={setVolumeOn}/>
       <VideoBackground movieId={mainMovie.id} volumeOn={volumeOn}/>
     </div>

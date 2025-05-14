@@ -36,7 +36,7 @@ const Header = () => {
     }, []);
 
   return (
-    <div className="px-4 sm:px-8 py-6 fixed w-full z-15 bg-gradient-to-b flex items-center justify-between from-black">
+    <div className="px-4 sm:px-8 py-6 fixed w-full z-30 bg-gradient-to-b flex items-center justify-between from-black">
       <div className="flex items-center gap-2 justify-center">
         <img
           className="w-[100px] sm:w-[150px] mix-blend-normal contrast-200 opacity-[1]"
