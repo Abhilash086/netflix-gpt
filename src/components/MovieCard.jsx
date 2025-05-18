@@ -6,7 +6,7 @@ const MovieCard = ({movie}) => {
   const navigate = useNavigate();
 
   const handleOnClick = ()=>{
-    navigate(`/movie/${movie?.id}`,{replace: true})
+    navigate(`/movie/${movie?.id}`, {replace: true})
   }
   
   return movie && (

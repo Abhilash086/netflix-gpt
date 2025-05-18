@@ -28,6 +28,10 @@
 - Netflix background video implemented
 - Made Responsive
 - Build Secondary container
+- GPT Search Bar
+- Implemented gptSlice for togglingbetween Home/GPT Page
+- GPT Search Page
+- Implemented configSlice for Multi-Language
 
 # Features
 - Login/Signup

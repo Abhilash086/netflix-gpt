@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useMovieTrailerVideo from "../hooks/useMovieTrailerVideo";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { addMovieTrailerVideo } from "../utils/moviesSlice";
+import { addMovieTrailerVideo, removeMovieTrailerVideo } from "../utils/moviesSlice";
+import Header from "./Header";
 
 const MovieTrailer = () => {
   const { movieId } = useParams();
@@ -13,21 +14,20 @@ const MovieTrailer = () => {
   const navigate = useNavigate();
 
   const movie = useSelector((store) => store?.movies?.movieTrailerVideo);
-  console.log(movie);
 
   useEffect(() => {
     window.history.pushState(null, null, window.location.pathname);
 
     const handlePopState = () => {
-      dispatch(addMovieTrailerVideo(null));
-      navigate("/")
+      dispatch(removeMovieTrailerVideo());
+      navigate("/browse")
     };
 
     window.addEventListener("popstate", handlePopState);
 
     return () => {
-      window.removeEventListener("popstate", handlePopState);
-      dispatch(addMovieTrailerVideo(null));
+      dispatch(removeMovieTrailerVideo());
+      navigate("/browse");
     };
   }, [navigate, dispatch]);
 
@@ -38,7 +38,7 @@ const MovieTrailer = () => {
           className="w-full absolute h-full"
           src={`https://www.youtube.com/embed/${movie?.key}?showinfo=0&rel=0&modestbranding=1&loop=1&playlist=${movie?.key}`}
           title="YouTube video player"
-          allow="accelerometer; controls; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
       </div>

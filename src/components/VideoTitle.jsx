@@ -14,7 +14,7 @@ const VideoTitle = ({ title, overview, setVolumeOn, volumeOn }) => {
             {title}
           </h1>
           <p className={`opacity-65 sm:opacity-100 text-[12px] ${volumeOn ? "hidden":"block"} sm:text-sm sm:w-10/12 text-white/80 font-normal w-10/12 md:w-5/12`}>
-            {overview}
+            {overview.slice(0, 100)+"..."}
           </p>
           <div className="flex gap-4">
             <button className="px-[10px] py-[5px] md:px-6 md:py-2 text-sm hover:bg-gray-400/40 hover:text-white/80 md:text-xl font-semibold cursor-pointer bg-[#bec4d0] border border-black rounded-sm">
