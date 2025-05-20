@@ -28,7 +28,6 @@ const GptSearchBar = () => {
           messages: [{ role: "user", content: gptQuery }],
         });
 
-        console.log(gptResults.choices);
       } catch (err) {
         console.error("GPT Error:", err);
       } finally {

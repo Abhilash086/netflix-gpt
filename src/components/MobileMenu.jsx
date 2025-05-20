@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 const MobileMenu = ({ showGptSearch, handleClick, handleSignOut }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  console.log(toggleMenu);
 
   const handleToggleMenu = () => {
     setToggleMenu(!toggleMenu);
