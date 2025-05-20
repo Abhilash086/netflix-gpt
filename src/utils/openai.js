@@ -1,9 +1,7 @@
-
 import OpenAI from 'openai';
-import { OPENAI_KEY } from './constants';
 
 const openai = new OpenAI({
-  apiKey: OPENAI_KEY,
+  apiKey: import.meta.env.OPENAI_KEY,
   dangerouslyAllowBrowser: true
 });
 

@@ -7,8 +7,6 @@ const GptSearchBar = () => {
   const language = useSelector((store) => store?.config?.lang);
   const searchText = useRef(null);
 
-  console.log(openai)
-
   const [loading, setLoading] = useState(false);
   const timeoutRef = useRef(null);
 
