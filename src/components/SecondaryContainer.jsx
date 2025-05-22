@@ -8,7 +8,7 @@ const SecondaryContainer = () => {
 
   return movies && (
     <div className='bg-black'>
-      <div className='py-4 px-4 md:px-10 lg:-mt-40 z-20 relative'>
+      <div className='py-4 px-4 md:px-10 lg:-mt-40 z-20 relative overflow-hidden'>
         <MovieList title={"Now Playing"} movies={movies?.nowPlayingMovies}/>
         <MovieList title={"Top Rated"} movies={movies?.topRatedMovies}/>
         <MovieList title={"Popular"} movies={movies?.popularMovies}/>

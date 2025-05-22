@@ -10,7 +10,6 @@ const MovieTrailer = () => {
   useMovieTrailerVideo(movieId);
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const movie = useSelector((store) => store?.movies?.movieTrailerVideo);

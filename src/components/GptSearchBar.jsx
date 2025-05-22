@@ -1,58 +1,35 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import lang from "../utils/languageConstants";
 import { useSelector } from "react-redux";
-import openai from "../utils/openai";
+import useGPTSearchMovies from "../hooks/useGptSearchMovies";
 
 const GptSearchBar = () => {
   const language = useSelector((store) => store?.config?.lang);
   const searchText = useRef(null);
 
-  const [loading, setLoading] = useState(false);
-  const timeoutRef = useRef(null);
+  const handleGptSearchClick = useGPTSearchMovies();
 
-  const handleGptSearchClick = async () => {
-    if (loading) return; // prevent spam clicking
-
-    setLoading(true);
-    clearTimeout(timeoutRef.current);
-
-    timeoutRef.current = setTimeout(async () => {
-      try {
-        const gptQuery =
-          "Act as a movie Recommendation system and suggest some movies for the query " +
-          searchText.current.value +
-          ". Only give me names of 5 movies, comma separated like the example result given ahead. Example Results: Sholay,KGF,Golmal,Koi mil gaya";
-
-        const gptResults = await openai.chat.completions.create({
-          model: "gpt-4o",
-          messages: [{ role: "user", content: gptQuery }],
-        });
-
-      } catch (err) {
-        console.error("GPT Error:", err);
-      } finally {
-        setLoading(false);
-      }
-    }, 400); // wait 400ms before sending request
-  };
+  const onSearchClick = ()=>{
+    handleGptSearchClick(searchText)
+  }
 
   return (
-    <div className="absolute top-[12%] w-full">
+    <div className="w-full flex items-center justify-center">
       <form
-        className="p-3 w-[60%] mx-auto flex items-center justify-center"
+        className="p-3 w-full sm:w-[60vw] flex items-center justify-center"
         onSubmit={(e) => e.preventDefault()}
       >
         <input
           ref={searchText}
           type="text"
-          className="w-full rounded-l-full bg-white p-4"
+          className="w-full rounded-l-full bg-white text-sm p-2 sm:p-4"
           placeholder={lang[language].gptPlaceHolder}
         />
         <button
-          onClick={handleGptSearchClick}
-          className="p-[14px] h-full bg-red-600 text-xl w-[6vw] rounded-r-lg cursor-pointer"
+          onClick={onSearchClick}
+          className="sm:p-[14px] bg-red-600 text-sm w-auto p-[10px] h-full sm:text-xl sm:w-[6vw] rounded-r-lg cursor-pointer"
         >
-          {loading ? "Searching..." : lang[language].search}
+          {lang[language].search}
         </button>
       </form>
     </div>
